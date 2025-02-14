@@ -13,10 +13,9 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      background: linear-gradient(135deg, #ff6f61, #ffcccb);
-      font-family: 'Arial', sans-serif;
+      background: #1a1a1a;
       color: #fff;
-      text-align: center;
+      font-family: 'Arial', sans-serif;
       overflow: hidden;
     }
 
@@ -24,14 +23,37 @@
       font-size: 2.5rem;
       margin: 20px;
       padding: 0 10px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
       animation: fadeIn 2s ease-in-out;
     }
 
-    .buttons {
-      display: flex;
-      gap: 20px; /* Adds space between the buttons */
-      justify-content: center;
-      align-items: center;
+    .typewriter {
+      overflow: hidden;
+      border-right: 0.15em solid #ff6f61;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: 0.15em;
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes blink-caret {
+      from, to {
+        border-color: transparent;
+      }
+      50% {
+        border-color: #ff6f61;
+      }
     }
 
     button {
@@ -40,44 +62,15 @@
       border: none;
       border-radius: 50px;
       cursor: pointer;
+      background: #ff6f61;
+      color: white;
       transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
     }
 
-    #yesButton {
-      background: #4CAF50;
-      color: white;
-    }
-
-    #yesButton:hover {
-      background: #45a049;
-    }
-
-    #noButton {
-      background: #f44336;
-      color: white;
-      opacity: 1; /* Initial opacity */
-      transition: opacity 0.5s ease;
-    }
-
-    .heart {
-      font-size: 3rem;
-      position: absolute;
-      animation: float 6s infinite ease-in-out;
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translate(0, 0);
-      }
-      25% {
-        transform: translate(100px, -75px);
-      }
-      50% {
-        transform: translate(-100px, 75px);
-      }
-      75% {
-        transform: translate(100px, 75px);
-      }
+    button:hover {
+      background: #ff4a3d;
     }
 
     .message {
@@ -85,6 +78,9 @@
       font-size: 1.5rem;
       margin: 20px;
       padding: 0 10px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
       animation: fadeIn 2s ease-in-out;
     }
 
@@ -94,6 +90,80 @@
       }
       to {
         opacity: 1;
+      }
+    }
+
+    /* Falling Rose Petals */
+    .petals {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .petals span {
+      position: absolute;
+      display: block;
+      font-size: 2rem;
+      animation: fall linear infinite;
+    }
+
+    .petals span::before {
+      content: '🌸';
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+
+    /* 3D Heart Animation */
+    .heart-3d {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      background: #ff6f61;
+      transform-style: preserve-3d;
+      animation: rotate 5s linear infinite;
+      z-index: 1;
+    }
+
+    .heart-3d::before,
+    .heart-3d::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: #ff6f61;
+      border-radius: 50%;
+    }
+
+    .heart-3d::before {
+      top: -50px;
+      left: 0;
+    }
+
+    .heart-3d::after {
+      top: 0;
+      left: 50px;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: translate(-50%, -50%) rotateY(0deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotateY(360deg);
       }
     }
 
@@ -112,54 +182,72 @@
         font-size: 1.2rem;
       }
 
-      .heart {
-        font-size: 2rem;
+      .petals span {
+        font-size: 1.5rem;
       }
 
-      @keyframes float {
-        0%, 100% {
-          transform: translate(0, 0);
-        }
-        25% {
-          transform: translate(50px, -50px);
-        }
-        50% {
-          transform: translate(-50px, 50px);
-        }
-        75% {
-          transform: translate(50px, 50px);
-        }
+      .heart-3d {
+        width: 80px;
+        height: 80px;
+      }
+
+      .heart-3d::before,
+      .heart-3d::after {
+        width: 80px;
+        height: 80px;
+      }
+
+      .heart-3d::before {
+        top: -40px;
+      }
+
+      .heart-3d::after {
+        left: 40px;
       }
     }
   </style>
 </head>
 <body>
-  <h1>Will you be my Valentine? ❤️</h1>
-  <div class="buttons">
-    <button id="yesButton">Yes</button>
-    <button id="noButton">No</button>
-  </div>
+  <h1>
+    <span class="typewriter">Will you be my Valentine?</span>
+  </h1>
+  <button id="yesButton">Yes</button>
   <div class="message" id="message">
     <p>You are the best thing that ever happened to me. You make everything better just by being you. Every moment with you feels like a dream come true. Be my Valentine forever and always ♾️❤️</p>
   </div>
 
-  <div class="heart">❤️</div>
+  <!-- Falling Rose Petals -->
+  <div class="petals">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- 3D Heart Animation -->
+  <div class="heart-3d"></div>
 
   <script>
-    const noButton = document.getElementById('noButton');
+    // Handle Button Click
     const yesButton = document.getElementById('yesButton');
     const message = document.getElementById('message');
 
-    noButton.addEventListener('click', () => {
-      // Fade out the "No" button
-      noButton.style.opacity = '0';
-      noButton.style.pointerEvents = 'none'; // Disable further clicks
-    });
-
     yesButton.addEventListener('click', () => {
       document.querySelector('h1').style.display = 'none';
-      document.querySelector('.buttons').style.display = 'none';
+      yesButton.style.display = 'none';
       message.style.display = 'block';
+    });
+
+    // Generate random positions for falling petals
+    const petals = document.querySelectorAll('.petals span');
+    petals.forEach((petal) => {
+      const randomLeft = Math.random() * window.innerWidth;
+      const randomDelay = Math.random() * 5;
+      const randomDuration = Math.random() * 5 + 5; // Between 5 and 10 seconds
+      petal.style.left = `${randomLeft}px`;
+      petal.style.animationDelay = `${randomDelay}s`;
+      petal.style.animationDuration = `${randomDuration}s`;
     });
   </script>
 </body>
