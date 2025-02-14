@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Be My Valentine?</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: linear-gradient(135deg, #ff6f61, #ffcccb);
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 20px;
+      padding: 0 10px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px; /* Adds space between the buttons */
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #yesButton {
+      background: #4CAF50;
+      color: white;
+    }
+
+    #yesButton:hover {
+      background: #45a049;
+    }
+
+    #noButton {
+      background: #f44336;
+      color: white;
+      opacity: 1; /* Initial opacity */
+      transition: opacity 0.5s ease;
+    }
+
+    .heart {
+      font-size: 3rem;
+      position: absolute;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0);
+      }
+      25% {
+        transform: translate(100px, -75px);
+      }
+      50% {
+        transform: translate(-100px, 75px);
+      }
+      75% {
+        transform: translate(100px, 75px);
+      }
+    }
+
+    .message {
+      display: none;
+      font-size: 1.5rem;
+      margin: 20px;
+      padding: 0 10px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Mobile Optimization */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      button {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+
+      .message {
+        font-size: 1.2rem;
+      }
+
+      .heart {
+        font-size: 2rem;
+      }
+
+      @keyframes float {
+        0%, 100% {
+          transform: translate(0, 0);
+        }
+        25% {
+          transform: translate(50px, -50px);
+        }
+        50% {
+          transform: translate(-50px, 50px);
+        }
+        75% {
+          transform: translate(50px, 50px);
+        }
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Will you be my Valentine? ❤️</h1>
+  <div class="buttons">
+    <button id="yesButton">Yes</button>
+    <button id="noButton">No</button>
+  </div>
+  <div class="message" id="message">
+    <p>You are the best thing that ever happened to me. You make everything better just by being you. Every moment with you feels like a dream come true. Be my Valentine forever and always ♾️❤️</p>
+  </div>
+
+  <div class="heart">❤️</div>
+
+  <script>
+    const noButton = document.getElementById('noButton');
+    const yesButton = document.getElementById('yesButton');
+    const message = document.getElementById('message');
+
+    noButton.addEventListener('click', () => {
+      // Fade out the "No" button
+      noButton.style.opacity = '0';
+      noButton.style.pointerEvents = 'none'; // Disable further clicks
+    });
+
+    yesButton.addEventListener('click', () => {
+      document.querySelector('h1').style.display = 'none';
+      document.querySelector('.buttons').style.display = 'none';
+      message.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
